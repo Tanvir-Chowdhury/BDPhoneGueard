@@ -4,3 +4,6 @@ Thumbs.db
 
 # Build intermediates (the zip in dist/ is the deliverable, the folder is not)
 dist/bdphoneguard/
+
+# Local demo stack (not part of the plugin)
+local-run/

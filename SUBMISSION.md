@@ -11,13 +11,15 @@ The distributable zip is at `dist/bdphoneguard-1.0.0.zip`.
    `Contributors` in readme.txt, as `Author` in the plugin header, and in the LICENSE/.pot
    copyright lines. The zip in `dist/` is rebuilt with it.
 
-2. **Run the test suite on any machine with PHP** (none was available where this was built — the
-   algorithm itself was verified with an identical Python port in `dev/algorithm-check.py`, but run
-   the real suite before submitting):
+2. **Run the test suite** (a static PHP 8.4 binary lives in `local-run/bin/php` for this; any PHP 7.2+ works):
    ```bash
    php dev/run-tests.php
-   # expected: "38 tests, 0 failures"
+   # expected: "51 tests, 0 failures"
    ```
+   These tests were run and pass, along with a live end-to-end check on the local
+   demo site (classic checkout, block checkout via the Store API, and the admin
+   settings screen all verified — junk blocked with the right messages, Bangla
+   digits stored as `01712345678`).
 
 3. **Install the zip on a test site** (local is fine) and check:
    - Settings → BD Phone Guard renders and saves.

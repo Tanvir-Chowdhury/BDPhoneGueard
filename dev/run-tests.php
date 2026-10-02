@@ -6,6 +6,7 @@
  */
 
 require __DIR__ . '/stubs.php';
+require __DIR__ . '/stubs-woocommerce.php';
 
 $bdpg_plugin_root = dirname( __DIR__ ) . '/bdphoneguard';
 
@@ -189,7 +190,12 @@ bdpg_test( 'options: sanitize rejects unknown values', function () {
 
 bdpg_test( 'options: sanitize survives garbage input', function () {
 	$clean = BD_Phone_Guard_Options::sanitize( 'not an array' );
-	bdpg_assert_same( BD_Phone_Guard_Options::defaults(), $clean );
+
+	bdpg_assert_same( 'national', $clean['output_format'], 'format falls back to the default' );
+	bdpg_assert_same( 'auto', $clean['error_language'], 'language falls back to the default' );
+	bdpg_assert_same( 0, $clean['reject_repeated'], 'absent checkboxes mean off' );
+	bdpg_assert_same( 0, $clean['enable_checkout'], 'absent checkboxes mean off' );
+	bdpg_assert_same( 0, $clean['enable_account'], 'absent checkboxes mean off' );
 } );
 
 bdpg_test( 'woocommerce: junk number blocks checkout', function () {
@@ -251,6 +257,78 @@ bdpg_test( 'woocommerce: integration can be disabled', function () {
 
 	bdpg_assert_same( array(), $errors->codes );
 	bdpg_set_options();
+} );
+
+bdpg_test( 'woocommerce: block checkout junk number throws a store API error', function () {
+	bdpg_set_options();
+	$order   = new BDPG_Fake_Order();
+	$request = new BDPG_Fake_Request( array( 'billing_address' => array( 'phone' => '01700000000' ) ) );
+
+	$thrown = false;
+
+	try {
+		BD_Phone_Guard_WooCommerce::validate_store_api_order( $order, $request );
+	} catch ( \Automattic\WooCommerce\StoreApi\Exceptions\RouteException $e ) {
+		$thrown = true;
+		bdpg_assert( false !== strpos( $e->getMessage(), 'does not look real' ), 'expected the customer-facing message' );
+	}
+
+	bdpg_assert( $thrown, 'expected a RouteException for a junk number' );
+} );
+
+bdpg_test( 'woocommerce: block checkout valid number normalizes the order', function () {
+	$order   = new BDPG_Fake_Order();
+	$request = new BDPG_Fake_Request( array(
+		'billing_address'  => array( 'phone' => '০১৭১২৩৪৫৬৭৮' ),
+		'shipping_address' => array( 'phone' => '+8801812345678' ),
+	) );
+
+	BD_Phone_Guard_WooCommerce::validate_store_api_order( $order, $request );
+
+	bdpg_assert_same( '01712345678', $order->billing_phone );
+	bdpg_assert_same( '01812345678', $order->shipping_phone );
+} );
+
+bdpg_test( 'woocommerce: block checkout integration can be disabled', function () {
+	bdpg_set_options( array( 'enable_checkout' => 0 ) );
+	$order   = new BDPG_Fake_Order();
+	$request = new BDPG_Fake_Request( array( 'billing_address' => array( 'phone' => '01700000000' ) ) );
+
+	BD_Phone_Guard_WooCommerce::validate_store_api_order( $order, $request );
+
+	bdpg_assert_same( '', $order->billing_phone, 'disabled integration must not touch the order' );
+	bdpg_set_options();
+} );
+
+bdpg_test( 'woocommerce: store api phone input is normalized before validation', function () {
+	bdpg_set_options();
+	$request = new BDPG_Fake_Request( array(
+		'billing_address'  => array( 'phone' => '০১৭১২৩৪৫৬৭৮' ),
+		'shipping_address' => array( 'phone' => '+880 1812-345678' ),
+	) );
+
+	BD_Phone_Guard_WooCommerce::normalize_store_api_phone_input( null, null, $request );
+
+	bdpg_assert_same( '01712345678', $request->get_param( 'billing_address' )['phone'] );
+	bdpg_assert_same( '01812345678', $request->get_param( 'shipping_address' )['phone'] );
+} );
+
+bdpg_test( 'woocommerce: store api unparseable phone is left for Woo to report', function () {
+	$request = new BDPG_Fake_Request( array(
+		'billing_address' => array( 'phone' => '12345' ),
+	) );
+
+	BD_Phone_Guard_WooCommerce::normalize_store_api_phone_input( null, null, $request );
+
+	bdpg_assert_same( '12345', $request->get_param( 'billing_address' )['phone'] );
+} );
+
+bdpg_test( 'woocommerce: non-store-api routes are ignored', function () {
+	$request = new BDPG_Fake_Request( array( 'billing_address' => array( 'phone' => '০১৭১২৩৪৫৬৭৮' ) ), '/wp/v2/users' );
+
+	BD_Phone_Guard_WooCommerce::normalize_store_api_phone_input( null, null, $request );
+
+	bdpg_assert_same( '০১৭১২৩৪৫৬৭৮', $request->get_param( 'billing_address' )['phone'] );
 } );
 
 bdpg_test( 'shortcode: renders a bound field', function () {

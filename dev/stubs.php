@@ -49,6 +49,49 @@ class BDPG_Fake_Checkout_Errors {
 	}
 }
 
+/**
+ * Minimal Store API request stand-in.
+ */
+class BDPG_Fake_Request {
+
+	private $params;
+	private $route;
+
+	public function __construct( $params, $route = '/wc/store/v1/checkout' ) {
+		$this->params = $params;
+		$this->route  = $route;
+	}
+
+	public function get_route() {
+		return $this->route;
+	}
+
+	public function get_param( $key ) {
+		return isset( $this->params[ $key ] ) ? $this->params[ $key ] : null;
+	}
+
+	public function set_param( $key, $value ) {
+		$this->params[ $key ] = $value;
+	}
+}
+
+/**
+ * Minimal order stand-in exposing only the phone setters.
+ */
+class BDPG_Fake_Order {
+
+	public $billing_phone  = '';
+	public $shipping_phone = '';
+
+	public function set_billing_phone( $value ) {
+		$this->billing_phone = $value;
+	}
+
+	public function set_shipping_phone( $value ) {
+		$this->shipping_phone = $value;
+	}
+}
+
 function is_wp_error( $thing ) {
 	return $thing instanceof WP_Error;
 }
@@ -196,3 +239,4 @@ function is_checkout() {
 function is_account_page() {
 	return false;
 }
+

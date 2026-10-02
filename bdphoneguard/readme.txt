@@ -24,7 +24,7 @@ BD Phone Guard fixes the number at the moment it is typed. Every valid number is
 * Normalizes everything to the format you choose: 01XXXXXXXXX, 01XXX-XXXXXX or +8801XXXXXXXXX.
 * Validates the 11-digit length and the operator prefix (013 to 019) and shows a clear error in Bangla or English.
 * Rejects obviously fake numbers like 01700000000, 01877777777 or 01111111111.
-* Checks the billing and shipping phone at WooCommerce checkout, the Addresses form and the Account details form in My Account.
+* Checks the billing and shipping phone at WooCommerce checkout — classic checkout and the block checkout both work — plus the Addresses form and the Account details form in My Account.
 * A `[bd_phone_guard]` shortcode adds a self-validating phone field to any page or plain HTML form.
 * A small PHP API for developers: `bdpg_normalize_phone()` and `bdpg_validate_phone()`, plus filters for prefixes, error messages and more.
 
@@ -57,6 +57,10 @@ Yes, with the `bdpg_operator_prefixes` filter:
 = Why did a real-looking number get rejected? =
 
 The fake-number check rejects numbers whose last eight digits are all identical, like 01711111111. If you would rather accept anything with a valid prefix, untick the strictness option on the settings page, or use the `bdpg_reject_repeated_digits` filter.
+
+= Does it work with the WooCommerce block checkout? =
+
+Yes. The classic checkout validates through the standard checkout hooks. The block checkout (the default on new WooCommerce installs) works too: Bangla digits are normalized before WooCommerce checks them, and anything with a bad prefix, wrong length or fake pattern is blocked when the order is placed, with the same friendly error.
 
 == Installation ==
 
