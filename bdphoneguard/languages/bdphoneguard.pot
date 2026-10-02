@@ -1,0 +1,123 @@
+# Copyright (C) 2026 tanvir11744
+# This file is distributed under the GPL v2 or later license.
+msgid ""
+msgstr ""
+"Project-Id-Version: BD Phone Guard 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bdphoneguard\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-02T00:00:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: BD Phone Guard 1.0.0\n"
+"X-Domain: bdphoneguard\n"
+
+#: includes/class-bdpg-phone.php
+msgid "Please enter your mobile number."
+msgstr ""
+
+#: includes/class-bdpg-phone.php
+msgid "Please enter a full 11-digit Bangladeshi mobile number, for example 01712345678."
+msgstr ""
+
+#: includes/class-bdpg-phone.php
+msgid "This does not look like a Bangladeshi mobile number. Valid numbers start with 013, 014, 015, 016, 017, 018 or 019."
+msgstr ""
+
+#: includes/class-bdpg-phone.php
+msgid "This phone number does not look real. Please check it and enter your correct mobile number."
+msgstr ""
+
+#: includes/class-bdpg-phone.php
+msgid "Please enter a valid Bangladeshi mobile number, for example 01712345678."
+msgstr ""
+
+#: includes/class-bdpg-phone.php
+msgid "Valid mobile number:"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "BD Phone Guard"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Validation rules"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "A valid Bangladeshi mobile number has 11 digits and starts with an operator prefix from 013 to 019, for example 01712345678 or +8801712345678."
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Saved number format"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "01XXXXXXXXX — no country code"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "01XXX-XXXXXX — pretty local style"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "+8801XXXXXXXXX — international (E.164)"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Keep what the customer typed — validate only"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Error message language"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Detect from the site language"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "English"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Strictness"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Reject obviously fake numbers like 01700000000 or 01877777777."
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "WooCommerce checkout"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Validate the billing and shipping phone during checkout and save them in the chosen format."
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "WooCommerce My Account pages"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Also check the phone fields on the Addresses and Account details pages."
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Use it anywhere"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Add a self-validating phone field to any form or page with the shortcode:"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "In PHP, other plugins and themes can use these functions:"
+msgstr ""
+
+#: includes/class-bdpg-settings.php
+msgid "Settings"
+msgstr ""

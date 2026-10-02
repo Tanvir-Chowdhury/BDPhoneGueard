@@ -1,0 +1,27 @@
+.bdpg-phone-field {
+	margin: 1em 0;
+}
+
+.bdpg-phone-label {
+	display: block;
+	margin-bottom: 0.25em;
+	font-weight: 600;
+}
+
+.bdpg-phone-input {
+	max-width: 22em;
+}
+
+.bdpg-phone-message {
+	margin: 0.25em 0 0;
+	font-size: 0.9em;
+	min-height: 1.2em;
+}
+
+.bdpg-phone-message.bdpg-is-valid {
+	color: #00703c;
+}
+
+.bdpg-phone-message.bdpg-is-invalid {
+	color: #b32d2e;
+}
