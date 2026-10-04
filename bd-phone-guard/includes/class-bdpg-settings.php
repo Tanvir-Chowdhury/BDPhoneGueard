@@ -27,10 +27,10 @@ class BD_Phone_Guard_Settings {
 	 */
 	public static function register_page() {
 		add_options_page(
-			__( 'BD Phone Guard', 'bdphoneguard' ),
-			__( 'BD Phone Guard', 'bdphoneguard' ),
+			__( 'BD Phone Guard', 'bd-phone-guard' ),
+			__( 'BD Phone Guard', 'bd-phone-guard' ),
 			'manage_options',
-			'bdphoneguard',
+			'bd-phone-guard',
 			array( __CLASS__, 'render_page' )
 		);
 	}
@@ -52,31 +52,31 @@ class BD_Phone_Guard_Settings {
 
 		add_settings_section(
 			'bdpg_section_rules',
-			__( 'Validation rules', 'bdphoneguard' ),
+			__( 'Validation rules', 'bd-phone-guard' ),
 			array( __CLASS__, 'render_rules_intro' ),
-			'bdphoneguard'
+			'bd-phone-guard'
 		);
 
-		add_settings_field( 'output_format', __( 'Saved number format', 'bdphoneguard' ), array( __CLASS__, 'field_output_format' ), 'bdphoneguard', 'bdpg_section_rules' );
-		add_settings_field( 'error_language', __( 'Error message language', 'bdphoneguard' ), array( __CLASS__, 'field_error_language' ), 'bdphoneguard', 'bdpg_section_rules' );
-		add_settings_field( 'reject_repeated', __( 'Strictness', 'bdphoneguard' ), array( __CLASS__, 'field_reject_repeated' ), 'bdphoneguard', 'bdpg_section_rules' );
+		add_settings_field( 'output_format', __( 'Saved number format', 'bd-phone-guard' ), array( __CLASS__, 'field_output_format' ), 'bd-phone-guard', 'bdpg_section_rules' );
+		add_settings_field( 'error_language', __( 'Error message language', 'bd-phone-guard' ), array( __CLASS__, 'field_error_language' ), 'bd-phone-guard', 'bdpg_section_rules' );
+		add_settings_field( 'reject_repeated', __( 'Strictness', 'bd-phone-guard' ), array( __CLASS__, 'field_reject_repeated' ), 'bd-phone-guard', 'bdpg_section_rules' );
 
 		add_settings_section(
 			'bdpg_section_places',
-			__( 'Where to validate', 'bdphoneguard' ),
+			__( 'Where to validate', 'bd-phone-guard' ),
 			'__return_false',
-			'bdphoneguard'
+			'bd-phone-guard'
 		);
 
-		add_settings_field( 'enable_checkout', __( 'WooCommerce checkout', 'bdphoneguard' ), array( __CLASS__, 'field_enable_checkout' ), 'bdphoneguard', 'bdpg_section_places' );
-		add_settings_field( 'enable_account', __( 'WooCommerce My Account pages', 'bdphoneguard' ), array( __CLASS__, 'field_enable_account' ), 'bdphoneguard', 'bdpg_section_places' );
+		add_settings_field( 'enable_checkout', __( 'WooCommerce checkout', 'bd-phone-guard' ), array( __CLASS__, 'field_enable_checkout' ), 'bd-phone-guard', 'bdpg_section_places' );
+		add_settings_field( 'enable_account', __( 'WooCommerce My Account pages', 'bd-phone-guard' ), array( __CLASS__, 'field_enable_account' ), 'bd-phone-guard', 'bdpg_section_places' );
 	}
 
 	/**
 	 * Short explainer above the rules section.
 	 */
 	public static function render_rules_intro() {
-		echo '<p class="description">' . esc_html__( 'A valid Bangladeshi mobile number has 11 digits and starts with an operator prefix from 013 to 019, for example 01712345678 or +8801712345678.', 'bdphoneguard' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'A valid Bangladeshi mobile number has 11 digits and starts with an operator prefix from 013 to 019, for example 01712345678 or +8801712345678.', 'bd-phone-guard' ) . '</p>';
 	}
 
 	/**
@@ -86,10 +86,10 @@ class BD_Phone_Guard_Settings {
 		$options = bdpg_get_options();
 
 		$formats = array(
-			'national' => __( '01XXXXXXXXX — no country code', 'bdphoneguard' ),
-			'dashed'   => __( '01XXX-XXXXXX — pretty local style', 'bdphoneguard' ),
-			'e164'     => __( '+8801XXXXXXXXX — international (E.164)', 'bdphoneguard' ),
-			'off'      => __( 'Keep what the customer typed — validate only', 'bdphoneguard' ),
+			'national' => __( '01XXXXXXXXX — no country code', 'bd-phone-guard' ),
+			'dashed'   => __( '01XXX-XXXXXX — pretty local style', 'bd-phone-guard' ),
+			'e164'     => __( '+8801XXXXXXXXX — international (E.164)', 'bd-phone-guard' ),
+			'off'      => __( 'Keep what the customer typed — validate only', 'bd-phone-guard' ),
 		);
 
 		echo '<fieldset>';
@@ -111,9 +111,9 @@ class BD_Phone_Guard_Settings {
 	public static function field_error_language() {
 		$options  = bdpg_get_options();
 		$language = array(
-			'auto' => __( 'Detect from the site language', 'bdphoneguard' ),
-			'bn'   => __( 'বাংলা (Bangla)', 'bdphoneguard' ),
-			'en'   => __( 'English', 'bdphoneguard' ),
+			'auto' => __( 'Detect from the site language', 'bd-phone-guard' ),
+			'bn'   => __( 'বাংলা (Bangla)', 'bd-phone-guard' ),
+			'en'   => __( 'English', 'bd-phone-guard' ),
 		);
 
 		printf(
@@ -143,7 +143,7 @@ class BD_Phone_Guard_Settings {
 			'<label><input type="checkbox" name="%1$s[reject_repeated]" value="1" %2$s /> %3$s</label>',
 			esc_attr( BD_Phone_Guard_Options::OPTION_KEY ),
 			checked( ! empty( $options['reject_repeated'] ), true, false ),
-			esc_html__( 'Reject obviously fake numbers like 01700000000 or 01877777777.', 'bdphoneguard' )
+			esc_html__( 'Reject obviously fake numbers like 01700000000 or 01877777777.', 'bd-phone-guard' )
 		);
 	}
 
@@ -157,7 +157,7 @@ class BD_Phone_Guard_Settings {
 			'<label><input type="checkbox" name="%1$s[enable_checkout]" value="1" %2$s /> %3$s</label>',
 			esc_attr( BD_Phone_Guard_Options::OPTION_KEY ),
 			checked( ! empty( $options['enable_checkout'] ), true, false ),
-			esc_html__( 'Validate the billing and shipping phone during checkout and save them in the chosen format.', 'bdphoneguard' )
+			esc_html__( 'Validate the billing and shipping phone during checkout and save them in the chosen format.', 'bd-phone-guard' )
 		);
 	}
 
@@ -171,7 +171,7 @@ class BD_Phone_Guard_Settings {
 			'<label><input type="checkbox" name="%1$s[enable_account]" value="1" %2$s /> %3$s</label>',
 			esc_attr( BD_Phone_Guard_Options::OPTION_KEY ),
 			checked( ! empty( $options['enable_account'] ), true, false ),
-			esc_html__( 'Also check the phone fields on the Addresses and Account details pages.', 'bdphoneguard' )
+			esc_html__( 'Also check the phone fields on the Addresses and Account details pages.', 'bd-phone-guard' )
 		);
 	}
 
@@ -193,16 +193,16 @@ class BD_Phone_Guard_Settings {
 			<form action="options.php" method="post">
 				<?php
 				settings_fields( 'bdpg_settings' );
-				do_settings_sections( 'bdphoneguard' );
+				do_settings_sections( 'bd-phone-guard' );
 				submit_button();
 				?>
 			</form>
 
-			<h2><?php esc_html_e( 'Use it anywhere', 'bdphoneguard' ); ?></h2>
-			<p><?php esc_html_e( 'Add a self-validating phone field to any form or page with the shortcode:', 'bdphoneguard' ); ?></p>
+			<h2><?php esc_html_e( 'Use it anywhere', 'bd-phone-guard' ); ?></h2>
+			<p><?php esc_html_e( 'Add a self-validating phone field to any form or page with the shortcode:', 'bd-phone-guard' ); ?></p>
 			<p><code><?php echo esc_html( $shortcode_example ); ?></code></p>
 
-			<p><?php esc_html_e( 'In PHP, other plugins and themes can use these functions:', 'bdphoneguard' ); ?></p>
+			<p><?php esc_html_e( 'In PHP, other plugins and themes can use these functions:', 'bd-phone-guard' ); ?></p>
 			<p>
 				<code><?php echo esc_html( $php_example ); ?></code><br />
 				<code><?php echo esc_html( '$valid = bdpg_validate_phone( $raw ); // true or WP_Error' ); ?></code>
@@ -218,9 +218,9 @@ class BD_Phone_Guard_Settings {
 	 * @return array
 	 */
 	public static function action_links( $links ) {
-		$url = admin_url( 'options-general.php?page=bdphoneguard' );
+		$url = admin_url( 'options-general.php?page=bd-phone-guard' );
 
-		array_unshift( $links, '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'bdphoneguard' ) . '</a>' );
+		array_unshift( $links, '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'bd-phone-guard' ) . '</a>' );
 
 		return $links;
 	}

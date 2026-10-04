@@ -8,7 +8,7 @@
  * Author:            tanvir11744
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       bdphoneguard
+ * Text Domain:       bd-phone-guard
  * Domain Path:       /languages
  *
  * @package BDPhoneGuard

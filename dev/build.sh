@@ -4,7 +4,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SLUG="bdphoneguard"
+SLUG="bd-phone-guard"
 
 # 1. Test (when PHP is available).
 if command -v php >/dev/null 2>&1; then

@@ -2,7 +2,7 @@
 Contributors: tanvir11744
 Tags: bangladesh, bangla, phone, validation, checkout
 Requires at least: 5.2
-Tested up to: 6.8
+Tested up to: 7.1
 Requires PHP: 7.2
 Stable tag: 1.0.0
 License: GPLv2 or later
@@ -64,7 +64,7 @@ Yes. The classic checkout validates through the standard checkout hooks. The blo
 
 == Installation ==
 
-1. Upload the `bdphoneguard` folder to `/wp-content/plugins/`, or install the plugin through the WordPress plugins screen.
+1. Upload the `bd-phone-guard` folder to `/wp-content/plugins/`, or install the plugin through the WordPress plugins screen.
 2. Activate the plugin.
 3. Go to Settings → BD Phone Guard and pick your saved number format and error language. The defaults work for most Bangladeshi stores.
 

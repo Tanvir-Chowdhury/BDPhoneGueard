@@ -49,7 +49,7 @@ final class BD_Phone_Guard_Plugin {
 	 * Loads translations from the plugin's languages folder.
 	 */
 	public function load_textdomain() {
-		load_plugin_textdomain( 'bdphoneguard', false, dirname( plugin_basename( BDPG_FILE ) ) . '/languages' );
+		load_plugin_textdomain( 'bd-phone-guard', false, dirname( plugin_basename( BDPG_FILE ) ) . '/languages' );
 	}
 
 	/**

@@ -5,12 +5,12 @@ many ways — `01712345678`, `+8801712345678`, `8801712345678`, `01712-345678`, 
 invisible characters pasted from chat apps — and BD Phone Guard turns it all into one clean number
 that couriers and SMS tools can actually use. Designed for cash-on-delivery stores.
 
-Built for the WordPress.org plugin directory (slug: `bdphoneguard`).
+Built for the WordPress.org plugin directory (slug: `bd-phone-guard`).
 
 ## Layout
 
 ```
-bdphoneguard/   the plugin itself — this folder is what ships (zip root / SVN trunk)
+bd-phone-guard/   the plugin itself — this folder is what ships (zip root / SVN trunk)
 dev/            tests + build tooling (never shipped)
 dist/           the built zip
 SUBMISSION.md   step-by-step wordpress.org submission instructions
@@ -44,7 +44,7 @@ SUBMISSION.md   step-by-step wordpress.org submission instructions
 ```bash
 php dev/run-tests.php      # test suite with WP shims, no WordPress install needed
 python3 dev/algorithm-check.py   # same algorithm in Python, for machines without PHP
-bash dev/build.sh          # rebuild dist/bdphoneguard-<version>.zip
+bash dev/build.sh          # rebuild dist/bd-phone-guard-<version>.zip
 ```
 
 The JS file `assets/js/bdpg-public.js` mirrors `BD_Phone_Guard_Phone::parse()` — keep both in

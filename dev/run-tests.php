@@ -8,7 +8,7 @@
 require __DIR__ . '/stubs.php';
 require __DIR__ . '/stubs-woocommerce.php';
 
-$bdpg_plugin_root = dirname( __DIR__ ) . '/bdphoneguard';
+$bdpg_plugin_root = dirname( __DIR__ ) . '/bd-phone-guard';
 
 // Every class file is loaded so the suite also catches parse errors in code
 // the tests themselves do not execute.

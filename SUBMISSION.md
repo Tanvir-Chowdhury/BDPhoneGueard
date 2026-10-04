@@ -1,7 +1,7 @@
 # BD Phone Guard — Submission Kit
 
 Everything needed to submit this plugin to the WordPress.org plugin directory.
-The distributable zip is at `dist/bdphoneguard-1.0.0.zip`.
+The distributable zip is at `dist/bd-phone-guard-1.0.0.zip`.
 
 ---
 
@@ -44,7 +44,7 @@ Log in at wordpress.org with the account whose username you put in the readme, t
 Fill the form exactly like this:
 
 - **Plugin name:** `BD Phone Guard`
-- **Plugin slug:** `bdphoneguard`
+- **Plugin slug:** `bd-phone-guard`
 - **A brief description of the plugin in a couple of sentences:**
 
   > BD Phone Guard validates and normalizes Bangladeshi mobile numbers on WooCommerce checkout and
@@ -57,7 +57,7 @@ Fill the form exactly like this:
   > A [bd_phone_guard] shortcode and a small PHP API (bdpg_normalize_phone / bdpg_validate_phone)
   > make it usable in any form, WooCommerce or not.
 
-- Upload `dist/bdphoneguard-1.0.0.zip`.
+- Upload `dist/bd-phone-guard-1.0.0.zip`.
 
 ## 2. While you wait
 
@@ -69,16 +69,16 @@ wording); every point they raise is already handled in this codebase, so you can
 
 ## 3. After approval — check in to SVN
 
-You'll get an email confirming the slug `https://wordpress.org/plugins/bdphoneguard/` is yours.
+You'll get an email confirming the slug `https://wordpress.org/plugins/bd-phone-guard/` is yours.
 Then:
 
 ```bash
 sudo apt install subversion   # once
-svn co https://plugins.svn.wordpress.org/bdphoneguard/ bdphoneguard-svn
-cd bdphoneguard-svn
+svn co https://plugins.svn.wordpress.org/bd-phone-guard/ bd-phone-guard-svn
+cd bd-phone-guard-svn
 
 # copy the plugin files (the contents of the zip) into trunk/
-cp -R /path/to/bd-phone-guard/bdphoneguard/* trunk/
+cp -R /path/to/bd-phone-guard/bd-phone-guard/* trunk/
 
 svn add trunk/* --force
 svn ci -m "Initial import of BD Phone Guard 1.0.0" --username YOUR_WPORG_USERNAME
@@ -112,7 +112,7 @@ both help the "family of Bangladesh tools" idea from the plan.
 | No external calls | Zero `wp_remote_*`, `curl`, sockets; pure PHP + regex |
 | Uninstall cleanup | `uninstall.php` deletes the single option, multisite-aware |
 | readme.txt | Full description/installation/FAQ/changelog, no brand names in title/slug (WooCommerce mentioned only as compatibility in description) |
-| i18n | Text domain `bdphoneguard`, `load_plugin_textdomain()`, `.pot` file included, Bangla error strings built in |
+| i18n | Text domain `bd-phone-guard`, `load_plugin_textdomain()`, `.pot` file included, Bangla error strings built in |
 
 ## 6. Roadmap after 1.0
 

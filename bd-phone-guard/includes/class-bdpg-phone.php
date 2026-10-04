@@ -194,11 +194,11 @@ class BD_Phone_Guard_Phone {
 			$domain   = 'bn';
 		} else {
 			$messages = array(
-				self::ERROR_EMPTY   => __( 'Please enter your mobile number.', 'bdphoneguard' ),
-				self::ERROR_LENGTH  => __( 'Please enter a full 11-digit Bangladeshi mobile number, for example 01712345678.', 'bdphoneguard' ),
-				self::ERROR_PREFIX  => __( 'This does not look like a Bangladeshi mobile number. Valid numbers start with 013, 014, 015, 016, 017, 018 or 019.', 'bdphoneguard' ),
-				self::ERROR_JUNK    => __( 'This phone number does not look real. Please check it and enter your correct mobile number.', 'bdphoneguard' ),
-				self::ERROR_INVALID => __( 'Please enter a valid Bangladeshi mobile number, for example 01712345678.', 'bdphoneguard' ),
+				self::ERROR_EMPTY   => __( 'Please enter your mobile number.', 'bd-phone-guard' ),
+				self::ERROR_LENGTH  => __( 'Please enter a full 11-digit Bangladeshi mobile number, for example 01712345678.', 'bd-phone-guard' ),
+				self::ERROR_PREFIX  => __( 'This does not look like a Bangladeshi mobile number. Valid numbers start with 013, 014, 015, 016, 017, 018 or 019.', 'bd-phone-guard' ),
+				self::ERROR_JUNK    => __( 'This phone number does not look real. Please check it and enter your correct mobile number.', 'bd-phone-guard' ),
+				self::ERROR_INVALID => __( 'Please enter a valid Bangladeshi mobile number, for example 01712345678.', 'bd-phone-guard' ),
 			);
 			$domain   = 'en';
 		}
@@ -227,7 +227,7 @@ class BD_Phone_Guard_Phone {
 			'prefix'      => self::message( self::ERROR_PREFIX ),
 			'junk'        => self::message( self::ERROR_JUNK ),
 			'invalid'     => self::message( self::ERROR_INVALID ),
-			'validNumber' => __( 'Valid mobile number:', 'bdphoneguard' ),
+			'validNumber' => __( 'Valid mobile number:', 'bd-phone-guard' ),
 		);
 	}
 

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BD Phone Guard 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bdphoneguard\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bd-phone-guard\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "POT-Creation-Date: 2026-10-02T00:00:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: BD Phone Guard 1.0.0\n"
-"X-Domain: bdphoneguard\n"
+"X-Domain: bd-phone-guard\n"
 
 #: includes/class-bdpg-phone.php
 msgid "Please enter your mobile number."
