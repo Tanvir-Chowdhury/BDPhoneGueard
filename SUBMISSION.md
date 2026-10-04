@@ -112,7 +112,7 @@ both help the "family of Bangladesh tools" idea from the plan.
 | No external calls | Zero `wp_remote_*`, `curl`, sockets; pure PHP + regex |
 | Uninstall cleanup | `uninstall.php` deletes the single option, multisite-aware |
 | readme.txt | Full description/installation/FAQ/changelog, no brand names in title/slug (WooCommerce mentioned only as compatibility in description) |
-| i18n | Text domain `bd-phone-guard`, `load_plugin_textdomain()`, `.pot` file included, Bangla error strings built in |
+| i18n | Text domain `bd-phone-guard`, `.pot` file included, translations auto-load from translate.wordpress.org, Bangla error strings built in |
 
 ## 6. Roadmap after 1.0
 

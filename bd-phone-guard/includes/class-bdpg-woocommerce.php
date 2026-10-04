@@ -93,8 +93,14 @@ class BD_Phone_Guard_WooCommerce {
 			$result = bdpg_validate_phone( $address['phone'] );
 
 			if ( is_wp_error( $result ) ) {
+				$error_code = 'bdpg_shipping_phone';
+
+				if ( 'billing' === $type ) {
+					$error_code = 'bdpg_billing_phone';
+				}
+
 				throw new \Automattic\WooCommerce\StoreApi\Exceptions\RouteException(
-					'bdpg_' . $type . '_phone',
+					esc_attr( $error_code ),
 					esc_html( $result->get_error_message() ),
 					400
 				);

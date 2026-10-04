@@ -36,20 +36,14 @@ final class BD_Phone_Guard_Plugin {
 	 * Registers all hooks.
 	 */
 	private function __construct() {
-		add_action( 'init', array( $this, 'load_textdomain' ) );
+		// Translations load automatically from translate.wordpress.org for
+		// plugins hosted on WordPress.org; the .pot file ships for GlotPress.
 		add_action( 'init', array( 'BD_Phone_Guard_Shortcode', 'init' ) );
 		add_action( 'init', array( 'BD_Phone_Guard_Settings', 'init' ) );
 
 		BD_Phone_Guard_WooCommerce::init();
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
-	}
-
-	/**
-	 * Loads translations from the plugin's languages folder.
-	 */
-	public function load_textdomain() {
-		load_plugin_textdomain( 'bd-phone-guard', false, dirname( plugin_basename( BDPG_FILE ) ) . '/languages' );
 	}
 
 	/**
