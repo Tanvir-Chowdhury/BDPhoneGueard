@@ -1,11 +1,11 @@
 /*
- * BD Phone Guard - live validation for Bangladeshi mobile numbers.
+ * Nombar BD Mobile Validator - live validation for Bangladeshi mobile numbers.
  * Server-side validation stays the authority; this is instant feedback.
  */
 ( function () {
 	'use strict';
 
-	var cfg = window.BDPG_PUBLIC || {};
+	var cfg = window.NOMBAR_PUBLIC || {};
 	var i18n = cfg.i18n || {};
 	var BN_DIGITS = '\u09E6\u09E7\u09E8\u09E9\u09EA\u09EB\u09EC\u09ED\u09EE\u09EF';
 
@@ -36,7 +36,7 @@
 	}
 
 	/*
-	 * Mirrors BD_Phone_Guard_Phone::parse() in PHP. Keep both in sync.
+	 * Mirrors Nombar_Phone::parse() in PHP. Keep both in sync.
 	 */
 	function check( rawValue ) {
 		var digits = cleanValue( rawValue );
@@ -85,22 +85,22 @@
 	}
 
 	function attach( input, message ) {
-		if ( input.getAttribute( 'data-bdpg-bound' ) ) {
+		if ( input.getAttribute( 'data-nombar-bound' ) ) {
 			return;
 		}
 
-		input.setAttribute( 'data-bdpg-bound', '1' );
+		input.setAttribute( 'data-nombar-bound', '1' );
 
 		function update() {
 			var result = check( input.value );
 
 			message.textContent = messageFor( result );
-			message.className = 'bdpg-phone-message ' + ( result.valid ? 'bdpg-is-valid' : 'bdpg-is-invalid' );
+			message.className = 'nombar-phone-message ' + ( result.valid ? 'nombar-is-valid' : 'nombar-is-invalid' );
 
 			if ( result.valid ) {
-				input.setAttribute( 'data-bdpg-valid', '1' );
+				input.setAttribute( 'data-nombar-valid', '1' );
 			} else {
-				input.removeAttribute( 'data-bdpg-valid' );
+				input.removeAttribute( 'data-nombar-valid' );
 			}
 		}
 
@@ -122,7 +122,7 @@
 	function ensureMessage( input ) {
 		var message = document.createElement( 'p' );
 
-		message.className = 'bdpg-phone-message';
+		message.className = 'nombar-phone-message';
 		message.setAttribute( 'role', 'status' );
 		message.setAttribute( 'aria-live', 'polite' );
 
@@ -133,11 +133,11 @@
 
 	function init() {
 		var inputs = document.querySelectorAll(
-			'.bdpg-phone-input, input[name="billing_phone"], input[name="shipping_phone"], input[name="account_phone"]'
+			'.nombar-phone-input, input[name="billing_phone"], input[name="shipping_phone"], input[name="account_phone"]'
 		);
 
 		Array.prototype.forEach.call( inputs, function ( input ) {
-			var message = input.parentNode.querySelector( '.bdpg-phone-message' );
+			var message = input.parentNode.querySelector( '.nombar-phone-message' );
 
 			if ( ! message ) {
 				message = ensureMessage( input );

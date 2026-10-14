@@ -2,7 +2,7 @@
 /**
  * Plugin option handling.
  *
- * @package BDPhoneGuard
+ * @package Nombar
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -10,9 +10,9 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Stores and sanitizes the plugin settings.
  */
-class BD_Phone_Guard_Options {
+class Nombar_Options {
 
-	const OPTION_KEY = 'bdpg_options';
+	const OPTION_KEY = 'nombar_options';
 
 	/**
 	 * Option defaults.
@@ -78,8 +78,8 @@ class BD_Phone_Guard_Options {
  *
  * @return array
  */
-function bdpg_get_options() {
-	return BD_Phone_Guard_Options::get();
+function nombar_get_options() {
+	return Nombar_Options::get();
 }
 
 /**
@@ -88,8 +88,8 @@ function bdpg_get_options() {
  * @param string $feature 'checkout' or 'account'.
  * @return bool
  */
-function bdpg_is_feature_active( $feature ) {
-	$options = bdpg_get_options();
+function nombar_is_feature_active( $feature ) {
+	$options = nombar_get_options();
 
 	return ( 'checkout' === $feature ) ? ! empty( $options['enable_checkout'] ) : ! empty( $options['enable_account'] );
 }

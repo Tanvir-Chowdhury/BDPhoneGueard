@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Faithful Python port of BD_Phone_Guard_Phone::clean() and ::parse() from
-includes/class-bdpg-phone.php, used to verify the algorithm when PHP is not
+Faithful Python port of Nombar_Phone::clean() and ::parse() from
+includes/class-nombar-phone.php, used to verify the algorithm when PHP is not
 available on this machine. The PHP suite in run-tests.php remains the
 authoritative test — run `php dev/run-tests.php` before every release.
 """

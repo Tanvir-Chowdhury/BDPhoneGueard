@@ -2,7 +2,7 @@
 /**
  * Plugin bootstrap.
  *
- * @package BDPhoneGuard
+ * @package Nombar
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -10,19 +10,19 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Wires the plugin's parts together.
  */
-final class BD_Phone_Guard_Plugin {
+final class Nombar_Plugin {
 
 	/**
 	 * Singleton instance.
 	 *
-	 * @var BD_Phone_Guard_Plugin|null
+	 * @var Nombar_Plugin|null
 	 */
 	private static $instance = null;
 
 	/**
 	 * Singleton accessor.
 	 *
-	 * @return BD_Phone_Guard_Plugin
+	 * @return Nombar_Plugin
 	 */
 	public static function instance() {
 		if ( null === self::$instance ) {
@@ -38,10 +38,10 @@ final class BD_Phone_Guard_Plugin {
 	private function __construct() {
 		// Translations load automatically from translate.wordpress.org for
 		// plugins hosted on WordPress.org; the .pot file ships for GlotPress.
-		add_action( 'init', array( 'BD_Phone_Guard_Shortcode', 'init' ) );
-		add_action( 'init', array( 'BD_Phone_Guard_Settings', 'init' ) );
+		add_action( 'init', array( 'Nombar_Shortcode', 'init' ) );
+		add_action( 'init', array( 'Nombar_Settings', 'init' ) );
 
-		BD_Phone_Guard_WooCommerce::init();
+		Nombar_WooCommerce::init();
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_assets' ) );
 	}
@@ -51,22 +51,22 @@ final class BD_Phone_Guard_Plugin {
 	 * by the shortcode, and on WooCommerce checkout and account pages.
 	 */
 	public function register_assets() {
-		wp_register_style( 'bdpg-public', BDPG_URL . 'assets/css/bdpg-public.css', array(), BDPG_VERSION );
-		wp_register_script( 'bdpg-public', BDPG_URL . 'assets/js/bdpg-public.js', array(), BDPG_VERSION, true );
+		wp_register_style( 'nombar-public', NOMBAR_URL . 'assets/css/nombar-public.css', array(), NOMBAR_VERSION );
+		wp_register_script( 'nombar-public', NOMBAR_URL . 'assets/js/nombar-public.js', array(), NOMBAR_VERSION, true );
 
 		wp_localize_script(
-			'bdpg-public',
-			'BDPG_PUBLIC',
+			'nombar-public',
+			'NOMBAR_PUBLIC',
 			array(
-				'format'         => bdpg_get_options()['output_format'],
-				'rejectRepeated' => (bool) bdpg_get_options()['reject_repeated'],
-				'i18n'           => BD_Phone_Guard_Phone::js_messages(),
+				'format'         => nombar_get_options()['output_format'],
+				'rejectRepeated' => (bool) nombar_get_options()['reject_repeated'],
+				'i18n'           => Nombar_Phone::js_messages(),
 			)
 		);
 
 		if ( function_exists( 'is_checkout' ) && ( is_checkout() || is_account_page() ) ) {
-			wp_enqueue_style( 'bdpg-public' );
-			wp_enqueue_script( 'bdpg-public' );
+			wp_enqueue_style( 'nombar-public' );
+			wp_enqueue_script( 'nombar-public' );
 		}
 	}
 

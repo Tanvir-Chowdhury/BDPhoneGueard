@@ -10,33 +10,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class WP_Error {
 
-	private $bdpg_code;
-	private $bdpg_message;
-	private $bdpg_data;
+	private $nombar_code;
+	private $nombar_message;
+	private $nombar_data;
 
 	public function __construct( $code = '', $message = '', $data = array() ) {
-		$this->bdpg_code    = $code;
-		$this->bdpg_message = $message;
-		$this->bdpg_data    = $data;
+		$this->nombar_code    = $code;
+		$this->nombar_message = $message;
+		$this->nombar_data    = $data;
 	}
 
 	public function get_error_code() {
-		return $this->bdpg_code;
+		return $this->nombar_code;
 	}
 
 	public function get_error_message() {
-		return $this->bdpg_message;
+		return $this->nombar_message;
 	}
 
 	public function get_error_data() {
-		return $this->bdpg_data;
+		return $this->nombar_data;
 	}
 }
 
 /**
  * Stand-in for WooCommerce's checkout error bag, which only needs add().
  */
-class BDPG_Fake_Checkout_Errors {
+class NOMBAR_Fake_Checkout_Errors {
 
 	public $codes = array();
 
@@ -52,7 +52,7 @@ class BDPG_Fake_Checkout_Errors {
 /**
  * Minimal Store API request stand-in.
  */
-class BDPG_Fake_Request {
+class NOMBAR_Fake_Request {
 
 	private $params;
 	private $route;
@@ -78,7 +78,7 @@ class BDPG_Fake_Request {
 /**
  * Minimal order stand-in exposing only the phone setters.
  */
-class BDPG_Fake_Order {
+class NOMBAR_Fake_Order {
 
 	public $billing_phone  = '';
 	public $shipping_phone = '';
@@ -113,7 +113,7 @@ function esc_url( $url ) {
 }
 
 function get_locale() {
-	return isset( $GLOBALS['bdpg_test_locale'] ) ? $GLOBALS['bdpg_test_locale'] : 'en_US';
+	return isset( $GLOBALS['nombar_test_locale'] ) ? $GLOBALS['nombar_test_locale'] : 'en_US';
 }
 
 function wp_parse_args( $args, $defaults = array() ) {
@@ -121,8 +121,8 @@ function wp_parse_args( $args, $defaults = array() ) {
 }
 
 function get_option( $name, $default = false ) {
-	if ( isset( $GLOBALS['bdpg_test_options'][ $name ] ) ) {
-		return $GLOBALS['bdpg_test_options'][ $name ];
+	if ( isset( $GLOBALS['nombar_test_options'][ $name ] ) ) {
+		return $GLOBALS['nombar_test_options'][ $name ];
 	}
 
 	return $default;
@@ -145,7 +145,7 @@ function wp_unslash( $value ) {
 }
 
 function wc_add_notice( $message, $type = 'notice', $args = array() ) {
-	$GLOBALS['bdpg_notices'][] = $message;
+	$GLOBALS['nombar_notices'][] = $message;
 }
 
 function shortcode_atts( $defaults, $atts, $tag = '' ) {
@@ -209,7 +209,7 @@ function current_user_can( ...$args ) {
 }
 
 function get_admin_page_title() {
-	return 'BD Phone Guard';
+	return 'Nombar BD Mobile Validator';
 }
 
 function admin_url( $path = '' ) {

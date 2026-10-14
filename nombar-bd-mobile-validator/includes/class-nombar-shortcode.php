@@ -1,8 +1,8 @@
 <?php
 /**
- * [bd_phone_guard] shortcode: a phone field that validates itself live.
+ * [nombar] shortcode: a phone field that validates itself live.
  *
- * @package BDPhoneGuard
+ * @package Nombar
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
  * Without a name attribute the field stores nothing — useful as a demo.
  * With a name attribute it can be dropped into any plain HTML form.
  */
-class BD_Phone_Guard_Shortcode {
+class Nombar_Shortcode {
 
 	/**
 	 * Registers the shortcode.
 	 */
 	public static function init() {
-		add_shortcode( 'bd_phone_guard', array( __CLASS__, 'render' ) );
+		add_shortcode( 'nombar', array( __CLASS__, 'render' ) );
 	}
 
 	/**
@@ -37,18 +37,18 @@ class BD_Phone_Guard_Shortcode {
 				'required'    => 'no',
 			),
 			$atts,
-			'bd_phone_guard'
+			'nombar'
 		);
 
-		wp_enqueue_style( 'bdpg-public' );
-		wp_enqueue_script( 'bdpg-public' );
+		wp_enqueue_style( 'nombar-public' );
+		wp_enqueue_script( 'nombar-public' );
 
-		$field_id = 'bdpg-phone-' . wp_unique_id();
+		$field_id = 'nombar-phone-' . wp_unique_id();
 
 		$attributes = array(
 			'type="tel"',
 			'id="' . esc_attr( $field_id ) . '"',
-			'class="bdpg-phone-input"',
+			'class="nombar-phone-input"',
 			'autocomplete="tel"',
 			'inputmode="tel"',
 		);
@@ -67,15 +67,15 @@ class BD_Phone_Guard_Shortcode {
 
 		ob_start();
 		?>
-		<div class="bdpg-phone-field">
+		<div class="nombar-phone-field">
 			<?php if ( '' !== $atts['label'] ) : ?>
-				<label class="bdpg-phone-label" for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $atts['label'] ); ?></label>
+				<label class="nombar-phone-label" for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $atts['label'] ); ?></label>
 			<?php endif; ?>
 			<?php
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- every attribute value is esc_attr()'d when the list is built.
 			echo '<input ' . implode( ' ', $attributes ) . ' />';
 			?>
-			<p class="bdpg-phone-message" role="status" aria-live="polite"></p>
+			<p class="nombar-phone-message" role="status" aria-live="polite"></p>
 		</div>
 		<?php
 		return (string) ob_get_clean();

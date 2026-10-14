@@ -2,7 +2,7 @@
 /**
  * WooCommerce integration.
  *
- * @package BDPhoneGuard
+ * @package Nombar
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Validates and normalizes phone fields at checkout and on My Account pages.
  */
-class BD_Phone_Guard_WooCommerce {
+class Nombar_WooCommerce {
 
 	/**
 	 * Registers hooks. The hooks only fire when WooCommerce is active, so no
@@ -41,7 +41,7 @@ class BD_Phone_Guard_WooCommerce {
 	public static function normalize_store_api_phone_input( $result, $server, $request ) {
 		unset( $result, $server );
 
-		if ( ! bdpg_is_feature_active( 'checkout' ) || ! method_exists( $request, 'get_route' ) || ! method_exists( $request, 'set_param' ) ) {
+		if ( ! nombar_is_feature_active( 'checkout' ) || ! method_exists( $request, 'get_route' ) || ! method_exists( $request, 'set_param' ) ) {
 			return null;
 		}
 
@@ -56,7 +56,7 @@ class BD_Phone_Guard_WooCommerce {
 				continue;
 			}
 
-			$parsed = BD_Phone_Guard_Phone::parse( $address['phone'] );
+			$parsed = Nombar_Phone::parse( $address['phone'] );
 
 			if ( is_array( $parsed ) ) {
 				$address['phone'] = $parsed['digits'];
@@ -76,7 +76,7 @@ class BD_Phone_Guard_WooCommerce {
 	 * @param WP_REST_Request $request Store API request.
 	 */
 	public static function validate_store_api_order( $order, $request ) {
-		if ( ! bdpg_is_feature_active( 'checkout' ) || ! class_exists( '\Automattic\WooCommerce\StoreApi\Exceptions\RouteException' ) ) {
+		if ( ! nombar_is_feature_active( 'checkout' ) || ! class_exists( '\Automattic\WooCommerce\StoreApi\Exceptions\RouteException' ) ) {
 			return;
 		}
 
@@ -90,13 +90,13 @@ class BD_Phone_Guard_WooCommerce {
 				continue;
 			}
 
-			$result = bdpg_validate_phone( $address['phone'] );
+			$result = nombar_validate_phone( $address['phone'] );
 
 			if ( is_wp_error( $result ) ) {
-				$error_code = 'bdpg_shipping_phone';
+				$error_code = 'nombar_shipping_phone';
 
 				if ( 'billing' === $type ) {
-					$error_code = 'bdpg_billing_phone';
+					$error_code = 'nombar_billing_phone';
 				}
 
 				throw new \Automattic\WooCommerce\StoreApi\Exceptions\RouteException(
@@ -106,7 +106,7 @@ class BD_Phone_Guard_WooCommerce {
 				);
 			}
 
-			$normalized = bdpg_normalize_phone( $address['phone'] );
+			$normalized = nombar_normalize_phone( $address['phone'] );
 
 			if ( ! is_wp_error( $normalized ) ) {
 				if ( 'billing' === $type ) {
@@ -125,7 +125,7 @@ class BD_Phone_Guard_WooCommerce {
 	 * @param WP_Error $errors Checkout errors.
 	 */
 	public static function validate_checkout( $data, $errors ) {
-		if ( ! bdpg_is_feature_active( 'checkout' ) ) {
+		if ( ! nombar_is_feature_active( 'checkout' ) ) {
 			return;
 		}
 
@@ -134,7 +134,7 @@ class BD_Phone_Guard_WooCommerce {
 				continue;
 			}
 
-			$result = bdpg_validate_phone( $data[ $field ] );
+			$result = nombar_validate_phone( $data[ $field ] );
 
 			if ( is_wp_error( $result ) ) {
 				$errors->add( $field, $result->get_error_message() );
@@ -152,11 +152,11 @@ class BD_Phone_Guard_WooCommerce {
 	 * @return string
 	 */
 	public static function normalize_checkout_phone( $value ) {
-		if ( ! bdpg_is_feature_active( 'checkout' ) ) {
+		if ( ! nombar_is_feature_active( 'checkout' ) ) {
 			return $value;
 		}
 
-		$normalized = bdpg_normalize_phone( $value );
+		$normalized = nombar_normalize_phone( $value );
 
 		return is_wp_error( $normalized ) ? $value : $normalized;
 	}
@@ -170,7 +170,7 @@ class BD_Phone_Guard_WooCommerce {
 	public static function validate_address( $user_id, $address_type ) {
 		unset( $user_id );
 
-		if ( ! bdpg_is_feature_active( 'account' ) ) {
+		if ( ! nombar_is_feature_active( 'account' ) ) {
 			return;
 		}
 
@@ -183,7 +183,7 @@ class BD_Phone_Guard_WooCommerce {
 			return;
 		}
 
-		$result = bdpg_validate_phone( $value );
+		$result = nombar_validate_phone( $value );
 
 		if ( is_wp_error( $result ) ) {
 			wc_add_notice( $result->get_error_message(), 'error' );
@@ -196,7 +196,7 @@ class BD_Phone_Guard_WooCommerce {
 	 * @param WP_Error $errors Account details errors.
 	 */
 	public static function validate_account_details( $errors ) {
-		if ( ! bdpg_is_feature_active( 'account' ) ) {
+		if ( ! nombar_is_feature_active( 'account' ) ) {
 			return;
 		}
 
@@ -207,7 +207,7 @@ class BD_Phone_Guard_WooCommerce {
 			return;
 		}
 
-		$result = bdpg_validate_phone( $value );
+		$result = nombar_validate_phone( $value );
 
 		if ( is_wp_error( $result ) ) {
 			$errors->add( 'account_phone', $result->get_error_message() );

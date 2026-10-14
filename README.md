@@ -1,16 +1,16 @@
-# BD Phone Guard
+# Nombar BD Mobile Validator
 
 A Bangladeshi mobile number validator and formatter for WordPress. Customers type the same number
 many ways — `01712345678`, `+8801712345678`, `8801712345678`, `01712-345678`, `০১৭১২৩৪৫৬৭৮`, with
-invisible characters pasted from chat apps — and BD Phone Guard turns it all into one clean number
+invisible characters pasted from chat apps — and Nombar BD Mobile Validator turns it all into one clean number
 that couriers and SMS tools can actually use. Designed for cash-on-delivery stores.
 
-Built for the WordPress.org plugin directory (slug: `bd-phone-guard`).
+Built for the WordPress.org plugin directory (slug: `nombar-bd-mobile-validator`).
 
 ## Layout
 
 ```
-bd-phone-guard/   the plugin itself — this folder is what ships (zip root / SVN trunk)
+nombar-bd-mobile-validator/   the plugin itself — this folder is what ships (zip root / SVN trunk)
 dev/            tests + build tooling (never shipped)
 dist/           the built zip
 SUBMISSION.md   step-by-step wordpress.org submission instructions
@@ -25,7 +25,7 @@ SUBMISSION.md   step-by-step wordpress.org submission instructions
 - Valid: 11 digits, prefix `013`–`019` (Grameenphone 013/017, Banglalink 014/019, Teletalk 015,
   Airtel 016, Robi 018).
 - Junk heuristic: the 8 digits after the prefix may not all be identical (`01700000000` fails).
-  Toggleable in settings and via the `bdpg_reject_repeated_digits` filter.
+  Toggleable in settings and via the `nombar_reject_repeated_digits` filter.
 - Error messages in Bangla, English, or auto-detected from the site locale.
 
 ## Integrations
@@ -34,20 +34,20 @@ SUBMISSION.md   step-by-step wordpress.org submission instructions
   `woocommerce_after_checkout_validation`, normalization via
   `woocommerce_process_checkout_field_*_phone`.
 - WooCommerce My Account: Addresses + Account details forms.
-- `[bd_phone_guard name="…" label="…" placeholder="…" required="yes"]` shortcode with a live
+- `[nombar name="…" label="…" placeholder="…" required="yes"]` shortcode with a live
   client-side hint (server stays the authority).
-- PHP API: `bdpg_normalize_phone( $raw, $format )`, `bdpg_validate_phone( $raw )`,
-  filters `bdpg_operator_prefixes`, `bdpg_reject_repeated_digits`, `bdpg_error_message`.
+- PHP API: `nombar_normalize_phone( $raw, $format )`, `nombar_validate_phone( $raw )`,
+  filters `nombar_operator_prefixes`, `nombar_reject_repeated_digits`, `nombar_error_message`.
 
 ## Development
 
 ```bash
 php dev/run-tests.php      # test suite with WP shims, no WordPress install needed
 python3 dev/algorithm-check.py   # same algorithm in Python, for machines without PHP
-bash dev/build.sh          # rebuild dist/bd-phone-guard-<version>.zip
+bash dev/build.sh          # rebuild dist/nombar-bd-mobile-validator-<version>.zip
 ```
 
-The JS file `assets/js/bdpg-public.js` mirrors `BD_Phone_Guard_Phone::parse()` — keep both in
+The JS file `assets/js/nombar-public.js` mirrors `Nombar_Phone::parse()` — keep both in
 sync when changing the rules. `dev/algorithm-check.py` is a third copy used only for verification.
 
 ## Scope

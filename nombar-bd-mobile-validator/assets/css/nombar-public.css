@@ -1,27 +1,27 @@
-.bdpg-phone-field {
+.nombar-phone-field {
 	margin: 1em 0;
 }
 
-.bdpg-phone-label {
+.nombar-phone-label {
 	display: block;
 	margin-bottom: 0.25em;
 	font-weight: 600;
 }
 
-.bdpg-phone-input {
+.nombar-phone-input {
 	max-width: 22em;
 }
 
-.bdpg-phone-message {
+.nombar-phone-message {
 	margin: 0.25em 0 0;
 	font-size: 0.9em;
 	min-height: 1.2em;
 }
 
-.bdpg-phone-message.bdpg-is-valid {
+.nombar-phone-message.nombar-is-valid {
 	color: #00703c;
 }
 
-.bdpg-phone-message.bdpg-is-invalid {
+.nombar-phone-message.nombar-is-invalid {
 	color: #b32d2e;
 }

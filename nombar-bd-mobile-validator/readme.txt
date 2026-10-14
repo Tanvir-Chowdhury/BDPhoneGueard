@@ -1,4 +1,4 @@
-=== BD Phone Guard ===
+=== Nombar BD Mobile Validator ===
 Contributors: tanvir11744
 Tags: bangladesh, bangla, phone, validation, checkout
 Requires at least: 5.2
@@ -14,7 +14,7 @@ Validates and cleans up Bangladeshi mobile numbers at checkout: Bangla digits, +
 
 Cash on delivery stores in Bangladesh lose real money when customers mistype their mobile number. The courier calls a dead number, the parcel comes back, and the SMS gateway silently drops the order updates.
 
-BD Phone Guard fixes the number at the moment it is typed. Every valid number is cleaned and saved in the one format your tools expect, and obviously broken ones are stopped at checkout with a friendly message in Bangla or English.
+Nombar BD Mobile Validator fixes the number at the moment it is typed. Every valid number is cleaned and saved in the one format your tools expect, and obviously broken ones are stopped at checkout with a friendly message in Bangla or English.
 
 **What it does**
 
@@ -25,8 +25,8 @@ BD Phone Guard fixes the number at the moment it is typed. Every valid number is
 * Validates the 11-digit length and the operator prefix (013 to 019) and shows a clear error in Bangla or English.
 * Rejects obviously fake numbers like 01700000000, 01877777777 or 01111111111.
 * Checks the billing and shipping phone at WooCommerce checkout — classic checkout and the block checkout both work — plus the Addresses form and the Account details form in My Account.
-* A `[bd_phone_guard]` shortcode adds a self-validating phone field to any page or plain HTML form.
-* A small PHP API for developers: `bdpg_normalize_phone()` and `bdpg_validate_phone()`, plus filters for prefixes, error messages and more.
+* A `[nombar]` shortcode adds a self-validating phone field to any page or plain HTML form.
+* A small PHP API for developers: `nombar_normalize_phone()` and `nombar_validate_phone()`, plus filters for prefixes, error messages and more.
 
 **Why it stays free**
 
@@ -34,7 +34,7 @@ This plugin is pure PHP and a few regular expressions. It runs entirely on your 
 
 = Does it send an OTP? =
 
-No, on purpose. OTP verification requires a paid SMS gateway. BD Phone Guard does the free part well: it makes sure the number is a real, complete, correctly formatted Bangladeshi mobile number before it reaches your orders.
+No, on purpose. OTP verification requires a paid SMS gateway. Nombar BD Mobile Validator does the free part well: it makes sure the number is a real, complete, correctly formatted Bangladeshi mobile number before it reaches your orders.
 
 = Which operators are supported? =
 
@@ -42,7 +42,7 @@ All Bangladeshi mobile prefixes: Grameenphone (013, 017), Robi (018), Airtel (01
 
 = Does it work without WooCommerce? =
 
-Yes. Use the `[bd_phone_guard]` shortcode on any page, or call `bdpg_normalize_phone()` / `bdpg_validate_phone()` from your own plugin or theme.
+Yes. Use the `[nombar]` shortcode on any page, or call `nombar_normalize_phone()` / `nombar_validate_phone()` from your own plugin or theme.
 
 = Does it support landline numbers? =
 
@@ -50,13 +50,13 @@ No. It validates mobile numbers only, because mobile numbers are what couriers a
 
 = Can I change the valid prefixes? =
 
-Yes, with the `bdpg_operator_prefixes` filter:
+Yes, with the `nombar_operator_prefixes` filter:
 
-`add_filter( 'bdpg_operator_prefixes', function( $prefixes ) { $prefixes['0132'] = 'Custom'; return $prefixes; } );`
+`add_filter( 'nombar_operator_prefixes', function( $prefixes ) { $prefixes['0132'] = 'Custom'; return $prefixes; } );`
 
 = Why did a real-looking number get rejected? =
 
-The fake-number check rejects numbers whose last eight digits are all identical, like 01711111111. If you would rather accept anything with a valid prefix, untick the strictness option on the settings page, or use the `bdpg_reject_repeated_digits` filter.
+The fake-number check rejects numbers whose last eight digits are all identical, like 01711111111. If you would rather accept anything with a valid prefix, untick the strictness option on the settings page, or use the `nombar_reject_repeated_digits` filter.
 
 = Does it work with the WooCommerce block checkout? =
 
@@ -64,9 +64,9 @@ Yes. The classic checkout validates through the standard checkout hooks. The blo
 
 == Installation ==
 
-1. Upload the `bd-phone-guard` folder to `/wp-content/plugins/`, or install the plugin through the WordPress plugins screen.
+1. Upload the `nombar-bd-mobile-validator` folder to `/wp-content/plugins/`, or install the plugin through the WordPress plugins screen.
 2. Activate the plugin.
-3. Go to Settings → BD Phone Guard and pick your saved number format and error language. The defaults work for most Bangladeshi stores.
+3. Go to Settings → Nombar BD Mobile Validator and pick your saved number format and error language. The defaults work for most Bangladeshi stores.
 
 == Frequently Asked Questions ==
 
@@ -85,6 +85,6 @@ On the WooCommerce order edit screen, in the billing (and shipping) phone field 
 == Changelog ==
 
 = 1.0.0 =
-* First release: WooCommerce checkout and account validation, Bangla digit support, format normalization, [bd_phone_guard] shortcode, settings page.
+* First release: WooCommerce checkout and account validation, Bangla digit support, format normalization, [nombar] shortcode, settings page.
 
 == Upgrade Notice ==

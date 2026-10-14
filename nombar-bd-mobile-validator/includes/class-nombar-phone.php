@@ -2,7 +2,7 @@
 /**
  * Core parser, validator and formatter for Bangladeshi mobile numbers.
  *
- * @package BDPhoneGuard
+ * @package Nombar
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
  * 8801712345678, 00 880 1712-345678, "017 12 34 56 78", ০১৭১২৩৪৫৬৭৮, and
  * numbers wrapped in invisible characters copied out of messaging apps.
  */
-class BD_Phone_Guard_Phone {
+class Nombar_Phone {
 
 	const ERROR_EMPTY   = 'empty';
 	const ERROR_LENGTH  = 'length';
@@ -41,7 +41,7 @@ class BD_Phone_Guard_Phone {
 		 *
 		 * @param array $prefixes prefix => operator name.
 		 */
-		return apply_filters( 'bdpg_operator_prefixes', $prefixes );
+		return apply_filters( 'nombar_operator_prefixes', $prefixes );
 	}
 
 	/**
@@ -149,14 +149,14 @@ class BD_Phone_Guard_Phone {
 	 * @return bool
 	 */
 	protected static function junk_check_enabled() {
-		$options = bdpg_get_options();
+		$options = nombar_get_options();
 
 		/**
 		 * Filters whether obviously fake numbers (all identical digits) are rejected.
 		 *
 		 * @param bool $enabled
 		 */
-		return (bool) apply_filters( 'bdpg_reject_repeated_digits', ! empty( $options['reject_repeated'] ) );
+		return (bool) apply_filters( 'nombar_reject_repeated_digits', ! empty( $options['reject_repeated'] ) );
 	}
 
 	/**
@@ -166,7 +166,7 @@ class BD_Phone_Guard_Phone {
 	 * @return WP_Error
 	 */
 	protected static function error( $code ) {
-		return new WP_Error( 'bdpg_' . $code, self::message( $code ), array( 'status' => 400 ) );
+		return new WP_Error( 'nombar_' . $code, self::message( $code ), array( 'status' => 400 ) );
 	}
 
 	/**
@@ -176,7 +176,7 @@ class BD_Phone_Guard_Phone {
 	 * @return string
 	 */
 	public static function message( $code ) {
-		$options = bdpg_get_options();
+		$options = nombar_get_options();
 		$lang    = $options['error_language'];
 
 		if ( 'auto' === $lang ) {
@@ -194,11 +194,11 @@ class BD_Phone_Guard_Phone {
 			$domain   = 'bn';
 		} else {
 			$messages = array(
-				self::ERROR_EMPTY   => __( 'Please enter your mobile number.', 'bd-phone-guard' ),
-				self::ERROR_LENGTH  => __( 'Please enter a full 11-digit Bangladeshi mobile number, for example 01712345678.', 'bd-phone-guard' ),
-				self::ERROR_PREFIX  => __( 'This does not look like a Bangladeshi mobile number. Valid numbers start with 013, 014, 015, 016, 017, 018 or 019.', 'bd-phone-guard' ),
-				self::ERROR_JUNK    => __( 'This phone number does not look real. Please check it and enter your correct mobile number.', 'bd-phone-guard' ),
-				self::ERROR_INVALID => __( 'Please enter a valid Bangladeshi mobile number, for example 01712345678.', 'bd-phone-guard' ),
+				self::ERROR_EMPTY   => __( 'Please enter your mobile number.', 'nombar-bd-mobile-validator' ),
+				self::ERROR_LENGTH  => __( 'Please enter a full 11-digit Bangladeshi mobile number, for example 01712345678.', 'nombar-bd-mobile-validator' ),
+				self::ERROR_PREFIX  => __( 'This does not look like a Bangladeshi mobile number. Valid numbers start with 013, 014, 015, 016, 017, 018 or 019.', 'nombar-bd-mobile-validator' ),
+				self::ERROR_JUNK    => __( 'This phone number does not look real. Please check it and enter your correct mobile number.', 'nombar-bd-mobile-validator' ),
+				self::ERROR_INVALID => __( 'Please enter a valid Bangladeshi mobile number, for example 01712345678.', 'nombar-bd-mobile-validator' ),
 			);
 			$domain   = 'en';
 		}
@@ -212,7 +212,7 @@ class BD_Phone_Guard_Phone {
 		 * @param string $code    The failure code.
 		 * @param string $domain  Language the message was built for: bn or en.
 		 */
-		return apply_filters( 'bdpg_error_message', $message, $code, $domain );
+		return apply_filters( 'nombar_error_message', $message, $code, $domain );
 	}
 
 	/**
@@ -227,7 +227,7 @@ class BD_Phone_Guard_Phone {
 			'prefix'      => self::message( self::ERROR_PREFIX ),
 			'junk'        => self::message( self::ERROR_JUNK ),
 			'invalid'     => self::message( self::ERROR_INVALID ),
-			'validNumber' => __( 'Valid mobile number:', 'bd-phone-guard' ),
+			'validNumber' => __( 'Valid mobile number:', 'nombar-bd-mobile-validator' ),
 		);
 	}
 
@@ -259,8 +259,8 @@ class BD_Phone_Guard_Phone {
  * @param string $raw Any user input.
  * @return true|WP_Error True when valid, WP_Error with a customer-ready message otherwise.
  */
-function bdpg_validate_phone( $raw ) {
-	$parsed = BD_Phone_Guard_Phone::parse( $raw );
+function nombar_validate_phone( $raw ) {
+	$parsed = Nombar_Phone::parse( $raw );
 
 	return is_wp_error( $parsed ) ? $parsed : true;
 }
@@ -273,15 +273,15 @@ function bdpg_validate_phone( $raw ) {
  *                            Pass 'off' to get the untouched input back after validation.
  * @return string|WP_Error The formatted number, or WP_Error when the number is invalid.
  */
-function bdpg_normalize_phone( $raw, $format = null ) {
-	$parsed = BD_Phone_Guard_Phone::parse( $raw );
+function nombar_normalize_phone( $raw, $format = null ) {
+	$parsed = Nombar_Phone::parse( $raw );
 
 	if ( is_wp_error( $parsed ) ) {
 		return $parsed;
 	}
 
 	if ( null === $format ) {
-		$options = bdpg_get_options();
+		$options = nombar_get_options();
 		$format  = $options['output_format'];
 	}
 
@@ -289,5 +289,5 @@ function bdpg_normalize_phone( $raw, $format = null ) {
 		return trim( (string) $raw );
 	}
 
-	return BD_Phone_Guard_Phone::format( $parsed['digits'], $format );
+	return Nombar_Phone::format( $parsed['digits'], $format );
 }

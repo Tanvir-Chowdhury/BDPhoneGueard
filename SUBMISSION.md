@@ -1,7 +1,7 @@
-# BD Phone Guard — Submission Kit
+# Nombar BD Mobile Validator — Submission Kit
 
 Everything needed to submit this plugin to the WordPress.org plugin directory.
-The distributable zip is at `dist/bd-phone-guard-1.0.0.zip`.
+The distributable zip is at `dist/nombar-bd-mobile-validator-1.0.0.zip`.
 
 ---
 
@@ -22,14 +22,14 @@ The distributable zip is at `dist/bd-phone-guard-1.0.0.zip`.
    digits stored as `01712345678`).
 
 3. **Install the zip on a test site** (local is fine) and check:
-   - Settings → BD Phone Guard renders and saves.
-   - Put `[bd_phone_guard]` on a page, type `০১৭১২৩৪৫৬৭৮` and `017-0000-0000` — valid and fake
+   - Settings → Nombar BD Mobile Validator renders and saves.
+   - Put `[nombar]` on a page, type `০১৭১২৩৪৫৬৭৮` and `017-0000-0000` — valid and fake
      respectively — and watch the live hint.
    - With WooCommerce + a COD product: checkout with `01234567890` must be blocked with the
      prefix error; checkout with `+8801712345678` must save `01712345678` on the order.
 
 4. **Run the official Plugin Check** (Plugins → Add New → search "Plugin Check", install, run it
-   against BD Phone Guard, category "plugin repo"). Fix anything it flags before uploading.
+   against Nombar BD Mobile Validator, category "plugin repo"). Fix anything it flags before uploading.
 
 5. Rebuild the zip after any edit: `bash dev/build.sh`
 
@@ -43,21 +43,21 @@ Log in at wordpress.org with the account whose username you put in the readme, t
 
 Fill the form exactly like this:
 
-- **Plugin name:** `BD Phone Guard`
-- **Plugin slug:** `bd-phone-guard`
+- **Plugin name:** `Nombar BD Mobile Validator`
+- **Plugin slug:** `nombar-bd-mobile-validator`
 - **A brief description of the plugin in a couple of sentences:**
 
-  > BD Phone Guard validates and normalizes Bangladeshi mobile numbers on WooCommerce checkout and
+  > Nombar BD Mobile Validator validates and normalizes Bangladeshi mobile numbers on WooCommerce checkout and
   > My Account forms. It converts Bangla digits (০১৭১২৩৪৫৬৭৮) to English, strips spaces, dashes and
   > invisible characters, accepts every common format (01712345678, +8801712345678, 8801712345678,
   > 008801712345678), validates the 11-digit length and the operator prefix (013–019), rejects
   > obviously fake numbers like 01700000000, and saves every number in the store's chosen format
   > (01XXXXXXXXX, 01XXX-XXXXXX or +8801XXXXXXXXX) with friendly error messages in Bangla or English.
   > It is pure PHP on the user's own site: no API calls, no SMS/OTP service, no external servers.
-  > A [bd_phone_guard] shortcode and a small PHP API (bdpg_normalize_phone / bdpg_validate_phone)
+  > A [nombar] shortcode and a small PHP API (nombar_normalize_phone / nombar_validate_phone)
   > make it usable in any form, WooCommerce or not.
 
-- Upload `dist/bd-phone-guard-1.0.0.zip`.
+- Upload `dist/nombar-bd-mobile-validator-1.0.0.zip`.
 
 ## 2. While you wait
 
@@ -69,19 +69,19 @@ wording); every point they raise is already handled in this codebase, so you can
 
 ## 3. After approval — check in to SVN
 
-You'll get an email confirming the slug `https://wordpress.org/plugins/bd-phone-guard/` is yours.
+You'll get an email confirming the slug `https://wordpress.org/plugins/nombar-bd-mobile-validator/` is yours.
 Then:
 
 ```bash
 sudo apt install subversion   # once
-svn co https://plugins.svn.wordpress.org/bd-phone-guard/ bd-phone-guard-svn
-cd bd-phone-guard-svn
+svn co https://plugins.svn.wordpress.org/nombar-bd-mobile-validator/ nombar-bd-mobile-validator-svn
+cd nombar-bd-mobile-validator-svn
 
 # copy the plugin files (the contents of the zip) into trunk/
-cp -R /path/to/bd-phone-guard/bd-phone-guard/* trunk/
+cp -R /path/to/nombar-bd-mobile-validator/nombar-bd-mobile-validator/* trunk/
 
 svn add trunk/* --force
-svn ci -m "Initial import of BD Phone Guard 1.0.0" --username YOUR_WPORG_USERNAME
+svn ci -m "Initial import of Nombar BD Mobile Validator 1.0.0" --username YOUR_WPORG_USERNAME
 ```
 
 The page goes live within a few minutes of the commit.
@@ -104,7 +104,7 @@ both help the "family of Bangladesh tools" idea from the plan.
 
 | Review point | Where |
 | --- | --- |
-| Unique prefix | All functions `bdpg_*`, classes `BD_Phone_Guard_*`, constants `BDPG_*` |
+| Unique prefix | All functions `nombar_*`, classes `Nombar_*`, constants `NOMBAR_*` |
 | Sanitized input | `sanitize_text_field( wp_unslash( ... ) )` on all `$_POST` reads; whitelist sanitize callback for settings |
 | Escaped output | `esc_html` / `esc_attr` / `esc_url` at every echo; JS uses `textContent` only |
 | Nonce on settings form | WordPress Settings API (`settings_fields()`), capability `manage_options` |
@@ -112,7 +112,7 @@ both help the "family of Bangladesh tools" idea from the plan.
 | No external calls | Zero `wp_remote_*`, `curl`, sockets; pure PHP + regex |
 | Uninstall cleanup | `uninstall.php` deletes the single option, multisite-aware |
 | readme.txt | Full description/installation/FAQ/changelog, no brand names in title/slug (WooCommerce mentioned only as compatibility in description) |
-| i18n | Text domain `bd-phone-guard`, `.pot` file included, translations auto-load from translate.wordpress.org, Bangla error strings built in |
+| i18n | Text domain `nombar-bd-mobile-validator`, `.pot` file included, translations auto-load from translate.wordpress.org, Bangla error strings built in |
 
 ## 6. Roadmap after 1.0
 
