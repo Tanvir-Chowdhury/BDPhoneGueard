@@ -34,7 +34,7 @@ svn status trunk | awk '/^!/ {print $2}' | xargs -r svn rm --quiet
 if [ -d "$ROOT/.wordpress-org" ]; then
 	rsync -a --exclude '.svn' "$ROOT/.wordpress-org/" assets/
 	svn add --force assets --quiet
-	find assets -name '*.png' -exec svn propset svn:mime-type image/png {} + --quiet
+	find assets -name '*.png' -exec svn propset --quiet svn:mime-type image/png {} +
 fi
 
 # 3. Tag the release from trunk.
