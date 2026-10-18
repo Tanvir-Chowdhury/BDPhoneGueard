@@ -7,3 +7,4 @@ dist/nombar-bd-mobile-validator/
 
 # Local demo stack (not part of the plugin)
 local-run/
+dist/svn/
