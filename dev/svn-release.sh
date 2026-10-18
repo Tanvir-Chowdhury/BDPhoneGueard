@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Publishes the plugin folder to the WordPress.org SVN repo: syncs trunk, tags the
+# Publishes the plugin folder to the WordPress.org SVN repo: syncs trunk and
+# .wordpress-org/ (screenshots) into assets, tags the
 # version from the plugin header, then commits (SVN prompts for the password).
 # Usage: bash dev/svn-release.sh [svn-username]
 set -euo pipefail
@@ -28,6 +29,13 @@ rsync -a --delete --exclude '.svn' --exclude '.DS_Store' "$ROOT/$SLUG/" "$SVN_DI
 cd "$SVN_DIR"
 svn add --force trunk --quiet
 svn status trunk | awk '/^!/ {print $2}' | xargs -r svn rm --quiet
+
+# Directory-page assets (screenshots, banners, icons) live outside trunk.
+if [ -d "$ROOT/.wordpress-org" ]; then
+	rsync -a --exclude '.svn' "$ROOT/.wordpress-org/" assets/
+	svn add --force assets --quiet
+	find assets -name '*.png' -exec svn propset svn:mime-type image/png {} + --quiet
+fi
 
 # 3. Tag the release from trunk.
 svn cp trunk "tags/$VERSION"

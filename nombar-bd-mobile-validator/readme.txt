@@ -82,6 +82,13 @@ The live hint formats the field when the customer leaves it, so they can see the
 
 On the WooCommerce order edit screen, in the billing (and shipping) phone field — saved in the format you chose.
 
+== Screenshots ==
+
+1. Bangla digits, spaces and dashes are recognised live and turned into a clean number.
+2. Numbers with an invalid operator prefix are flagged before the form is submitted.
+3. WooCommerce checkout stops an obviously fake number with a clear message.
+4. Settings page: saved number format, error language, strictness and where to validate.
+
 == Changelog ==
 
 = 1.0.0 =
